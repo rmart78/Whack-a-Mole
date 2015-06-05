@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Whack-A-Mole</title>
+	<link rel="stylesheet" type="text/css" href="/css/guac-a-mole.css">
+	<style>
+
+		.container {
+		border: 1px solid blue;
+		}	
+
+	.row {
+		border: 1px solid green;
+		}
+
+	.column {
+		border: 1px solid red;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="buttonContainer">
+	<button id="start">Start</button>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div id="one" class="column one-third">Column</div>
+			<div id="two" class="column one-third">Column</div>
+			<div id="three" class="column one-third">Column</div>
+		</div>
+		<div class="row">
+			<div id="four" class="column one-third">Column</div>
+			<div id="five" class="column one-third"><img id="avocado" src="/img/th-Cartoon-Mole.png"></div>
+			<div id="six" class="column one-third">Column</div>
+		</div>
+		<div class="row">
+			<div id="seven" class="column one-third">Column</div>
+			<div id="eight" class="column one-third">Column</div>
+			<div id="nine" class="column one-third">Column</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+	<script type="text/javascript">
+	"use strict";
+
+	var loopDelay1;
+
+		  function tileGenerator() {
+    		var tiles = ['one','two','three','four','five','six','seven','eight','nine'];
+    		var randomTile = tiles[Math.floor(Math.random() * tiles.length)];
+    		return randomTile;
+    		console.log(randomTile);
+		  }
+
+		  var superTile = '';
+
+		  var image = '<img id="avocado" src="/img/th-Cartoon-Mole.png">';
+
+		  function startGame () {
+		  	var random = '#' + tileGenerator();
+		  	if (random != '#five') {
+		  	$('#five').html('');
+		  	superTile = random;
+		  	$(random).html($(image).fadeIn(1000));
+		  	console.log(superTile);
+		  	jumpTile();
+		  } else {
+		  	startGame();
+		  }
+		  }
+
+		  function chaseMole () {
+		  	var random2 = '#' + tileGenerator();
+		  	if (superTile != random2) {
+		  		$(superTile).html('');
+		  		$(random2).html($(image).fadeIn(1000));
+		  		superTile = random2;
+		  	} else {
+		  		chaseMole();
+		  	}
+		  }
+
+		  function jumpTile () {
+            loopDelay1 = setInterval(function(){
+            	chaseMole();
+            }, 1500);
+        }
+
+
+		   $('#start').click(function(){
+                startGame();
+    		});
+
+		    
+		    $('.column').click(function(){
+		    	if (('#' + this.id) == superTile) {
+		    	clearInterval(loopDelay1);
+		    	console.log(superTile);
+		    	chaseMole();
+		    	jumpTile();	
+		    	console.log(this.id);
+		    	console.log('it is now working, bud!')
+		    } else {
+		    	console.log('Nope, try again.');
+		    }
+    		});
+
+
+
+	</script>
+
+</body>
+</html>
