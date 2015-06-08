@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Whack-A-Mole</title>
-	<link rel="stylesheet" type="text/css" href="/css/guac-a-mole.css">
+	<link rel="stylesheet" type="text/css" href="/css/whack-a-mole.css">
 	<style>
 
 		.container {
@@ -10,11 +10,11 @@
 		}	
 
 	.row {
-		border: 1px solid green;
+		border: 1px solid blue;
 		}
 
 	.column {
-		border: 1px solid red;
+		border: 1px solid blue;
 		}
 
 	</style>
@@ -25,19 +25,19 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div id="one" class="column one-third">Column</div>
+			<div id="one" class="column one-third overflow">Column</div>
 			<div id="two" class="column one-third">Column</div>
-			<div id="three" class="column one-third">Column</div>
+			<div id="three" class="column one-third overflow">Column</div>
 		</div>
 		<div class="row">
 			<div id="four" class="column one-third">Column</div>
-			<div id="five" class="column one-third"><img id="avocado" src="/img/th-Cartoon-Mole.png"></div>
+			<div id="five" class="column one-third">Column</div>
 			<div id="six" class="column one-third">Column</div>
 		</div>
 		<div class="row">
-			<div id="seven" class="column one-third">Column</div>
+			<div id="seven" class="column one-third overflow">Column</div>
 			<div id="eight" class="column one-third">Column</div>
-			<div id="nine" class="column one-third">Column</div>
+			<div id="nine" class="column one-third overflow">Column</div>
 		</div>
 	</div>
 
@@ -57,28 +57,27 @@
     		console.log(randomTile);
 		  }
 
-		  var superTile = '';
+		  function molemanGenerator() {
+    		var moles = ['<img id="avocado" src="/img/img_1331.png">','<img id="avocado" src="/img/img_1332.png">','<img id="avocado" src="/img/img_1333.png">'];
+    		var randomMole = moles[Math.floor(Math.random() * moles.length)];
+    		return randomMole;
+		  }
 
-		  var image = '<img id="avocado" src="/img/th-Cartoon-Mole.png">';
+		  var superTile = '';
 
 		  function startGame () {
 		  	var random = '#' + tileGenerator();
-		  	if (random != '#five') {
-		  	$('#five').html('');
 		  	superTile = random;
-		  	$(random).html($(image).fadeIn(1000));
+		  	$(random).html($(molemanGenerator()).fadeIn(1000));
 		  	console.log(superTile);
 		  	jumpTile();
-		  } else {
-		  	startGame();
-		  }
 		  }
 
 		  function chaseMole () {
 		  	var random2 = '#' + tileGenerator();
 		  	if (superTile != random2) {
 		  		$(superTile).html('');
-		  		$(random2).html($(image).fadeIn(1000));
+		  		$(random2).html($(molemanGenerator()).fadeIn(1000));
 		  		superTile = random2;
 		  	} else {
 		  		chaseMole();
