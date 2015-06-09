@@ -17,10 +17,6 @@ html {
     cursor: url(/img/hammer.png), auto;
 }
 
-/*.row {
-    width:100%;
-}*/
-
 .row:after {
     content: "";
     display: table;
@@ -153,7 +149,7 @@ body {
     box-shadow: 0px 8px 0px #878787, 0px 8px 20px #000000;
     color: #FFFFFF;
     display: inline-block;
-    font-size: 25px;
+    font-size: 20px;
     padding: 2px 10px;
     text-align: center;
     text-decoration: none;
@@ -208,6 +204,20 @@ body {
                0 10px 10px rgba(0,0,0,.2),
                0 20px 20px rgba(0,0,0,.15);
 }
+
+#five {
+    background-color: blue;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    vertical-align: center;
+    font-family: 'Bangers', cursive;
+}
+
+#scoreTitle {
+    margin-top: 35px;
+}
+
 
 
 

@@ -9,18 +9,19 @@
 	<style>
 
 		.container {
-		border: 1px solid blue;
+		border: 3px solid #ff9100;
 		}	
 
-	.row {
+/*	.row {
 		border: 1px solid blue;
-		}
+		}*/
 
 	.column {
-		border: 1px solid blue;
+		border: 3px solid #ff9100;
 		}
 
 	</style>
+	<audio id="nelson" src="/nelson.mp3"></audio>
 </head>
 <body>
 	<div id="hansContainer">
@@ -37,7 +38,10 @@
 		</div>
 		<div class="row">
 			<div id="four" class="column one-third"></div>
-			<div id="five" class="column one-third"></div>
+			<div id="five" class="column one-third">
+				<div class="score" id="scoreTitle">Score</div>
+				<div class="score" id="scoreScore">0</div>
+			</div>
 			<div id="six" class="column one-third"></div>
 		</div>
 		<div class="row">
@@ -55,6 +59,8 @@
 	"use strict";
 
 	var loopDelay1;
+
+	var theScore = 0;
 
 		  function tileGenerator() {
     		var tiles = ['one','two','three','four','six','seven','eight','nine'];
@@ -96,26 +102,38 @@
             }, 1500);
         }
 
+        var buttonValue = 0;
 
 		   $('#start').click(function(){
-		   		// $('#start').css(box-shadow, none);
+		   	if (buttonValue == 1) {
+		   		location.reload(true);
+		   	} else {
                 startGame();
+                $('#start').html('Reset');
+                buttonValue = 1;
+            }
     		});
 
 		    
 		    $('.column').click(function(){
 		    	if (('#' + this.id) == superTile) {
-		    	$('#' + this.id).effect('shake', 100);
+		    	$('#avocado').effect('explode', 100);
 		    	clearInterval(loopDelay1);
 		    	console.log(superTile);
 		    	chaseMole();
 		    	jumpTile();	
+		    	theScore++;
+		    	$('#scoreScore').html(theScore);
 		    	console.log(this.id);
 		    	console.log('it is now working, bud!')
 		    } else {
+		    	document.getElementById("nelson").play();
 		    	console.log('Nope, try again.');
 		    }
     		});
+
+
+        // });
 
 
 
