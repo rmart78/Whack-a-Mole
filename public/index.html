@@ -24,13 +24,13 @@
 	<audio id="nelson" src="/nelson.mp3"></audio>
 </head>
 <body>
-	<div id="hansContainer">
+	<div id="hansContainer" class="slideOut">
 		<div id="title">Whack-A-Moleman!</div>
 	<img id="hans" src="/img/img_1334.png">
 	<button id="start">Start</button>
 	</div>
 	
-	<div class="container">
+	<div class="container slideOut">
 		<div class="row">
 			<div id="one" class="column one-third overflow"></div>
 			<div id="two" class="column one-third"></div>
@@ -41,6 +41,7 @@
 			<div id="five" class="column one-third">
 				<div class="score" id="scoreTitle">Score</div>
 				<div class="score" id="scoreScore">0</div>
+				<div id="scoreHousing" class="score">00:<span id="scoreTimer">11</span></div>
 			</div>
 			<div id="six" class="column one-third"></div>
 		</div>
@@ -49,6 +50,10 @@
 			<div id="eight" class="column one-third"></div>
 			<div id="nine" class="column one-third overflow"></div>
 		</div>
+	</div>
+	<div id="gameOverContainer">
+	<h1 id="overTitle" class="gameOver">Game Over</h1>
+	<h2 id="finalScoreLead" class="gameOver">Final Score: <span id="finalScore" class="gameOver"></span></h2>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -59,8 +64,9 @@
 	"use strict";
 
 	var loopDelay1;
-
 	var theScore = 0;
+  	var superTile = '';
+    var buttonValue = 0;
 
 		  function tileGenerator() {
     		var tiles = ['one','two','three','four','six','seven','eight','nine'];
@@ -75,7 +81,6 @@
     		return randomMole;
 		  }
 
-		  var superTile = '';
 
 		  function startGame () {
 		  	var random = '#' + tileGenerator();
@@ -102,7 +107,23 @@
             }, 1500);
         }
 
-        var buttonValue = 0;
+         function countDown () {
+            var timeCounter = setInterval(function(){
+            	if (document.getElementById('scoreTimer').innerHTML == 1) {
+            		$("#finalScore").html($('#scoreScore').html());
+            		clearInterval(timeCounter);
+            		clearInterval(loopDelay1);
+            		$('.slideOut').effect('puff', 1000);
+        		    $(".gameOver").css("visibility","visible");
+            	} 
+            	if (document.getElementById('scoreTimer').innerHTML == 10) {
+            		document.getElementById('scoreHousing').innerHTML = '00:0<span id="scoreTimer">9</span>';
+            	}	
+            	else {
+            	document.getElementById('scoreTimer').innerHTML -= 1;
+            }
+            }, 1000);
+        }
 
 		   $('#start').click(function(){
 		   	if (buttonValue == 1) {
@@ -111,6 +132,7 @@
                 startGame();
                 $('#start').html('Reset');
                 buttonValue = 1;
+                countDown();
             }
     		});
 
