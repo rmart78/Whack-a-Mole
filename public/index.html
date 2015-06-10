@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>Whack-A-Mole</title>
 	<link rel="stylesheet" type="text/css" href="/css/whack-a-mole.css">
-
 	<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
-
 	<style>
-
 		.container {
 		border: 3px solid #ff9100;
 		}	
-
-/*	.row {
-		border: 1px solid blue;
-		}*/
-
-	.column {
+		.column {
 		border: 3px solid #ff9100;
 		}
-
 	</style>
 	<audio id="nelson" src="/nelson.mp3"></audio>
 </head>
 <body>
 	<div id="hansContainer" class="slideOut">
 		<div id="title">Whack-A-Moleman!</div>
-	<img id="hans" src="/img/img_1334.png">
-	<button id="start">Start</button>
+		<img id="hans" src="/img/img_1334.png">
+		<button id="start">Start</button>
 	</div>
 	
 	<div class="container slideOut">
@@ -41,7 +33,7 @@
 			<div id="five" class="column one-third">
 				<div class="score" id="scoreTitle">Score</div>
 				<div class="score" id="scoreScore">0</div>
-				<div id="scoreHousing" class="score">00:<span id="scoreTimer">11</span></div>
+				<div id="scoreHousing" class="score">00:<span id="scoreTimer">30</span></div>
 			</div>
 			<div id="six" class="column one-third"></div>
 		</div>
@@ -52,8 +44,8 @@
 		</div>
 	</div>
 	<div id="gameOverContainer">
-	<h1 id="overTitle" class="gameOver">Game Over</h1>
-	<h2 id="finalScoreLead" class="gameOver">Final Score: <span id="finalScore" class="gameOver"></span></h2>
+		<h1 id="overTitle" class="gameOver">Game Over</h1>
+		<h2 id="finalScoreLead" class="gameOver">Final Score: <span id="finalScore" class="gameOver"></span></h2>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -63,34 +55,32 @@
 	<script type="text/javascript">
 	"use strict";
 
-	var loopDelay1;
-	var theScore = 0;
-  	var superTile = '';
-    var buttonValue = 0;
+		var loopDelay1;
+		var theScore = 0;
+  		var superTile = '';
+    	var buttonValue = 0;
 
-		  function tileGenerator() {
-    		var tiles = ['one','two','three','four','six','seven','eight','nine'];
-    		var randomTile = tiles[Math.floor(Math.random() * tiles.length)];
-    		return randomTile;
-    		console.log(randomTile);
-		  }
+		function tileGenerator() {
+			var tiles = ['one','two','three','four','six','seven','eight','nine'];
+			var randomTile = tiles[Math.floor(Math.random() * tiles.length)];
+			return randomTile;
+		}
 
-		  function molemanGenerator() {
+	  	function molemanGenerator() {
     		var moles = ['<img id="avocado" src="/img/img_1331.png">','<img id="avocado" src="/img/img_1332.png">','<img id="avocado" src="/img/img_1333.png">'];
     		var randomMole = moles[Math.floor(Math.random() * moles.length)];
     		return randomMole;
-		  }
+	  	}
 
 
-		  function startGame () {
+	  	function startGame () {
 		  	var random = '#' + tileGenerator();
 		  	superTile = random;
 		  	$(random).html($(molemanGenerator()).fadeIn(1000));
-		  	console.log(superTile);
 		  	jumpTile();
-		  }
+	  	}
 
-		  function chaseMole () {
+	  	function chaseMole () {
 		  	var random2 = '#' + tileGenerator();
 		  	if (superTile != random2) {
 		  		$(superTile).html('');
@@ -99,15 +89,15 @@
 		  	} else {
 		  		chaseMole();
 		  	}
-		  }
+	  	}
 
-		  function jumpTile () {
+	  	function jumpTile () {
             loopDelay1 = setInterval(function(){
             	chaseMole();
             }, 1500);
         }
 
-         function countDown () {
+     	function countDown () {
             var timeCounter = setInterval(function(){
             	if (document.getElementById('scoreTimer').innerHTML == 1) {
             		$("#finalScore").html($('#scoreScore').html());
@@ -121,11 +111,11 @@
             	}	
             	else {
             	document.getElementById('scoreTimer').innerHTML -= 1;
-            }
+            	}
             }, 1000);
         }
 
-		   $('#start').click(function(){
+	   	$('#start').click(function(){
 		   	if (buttonValue == 1) {
 		   		location.reload(true);
 		   	} else {
@@ -134,11 +124,11 @@
                 buttonValue = 1;
                 countDown();
             }
-    		});
+		});
 
 		    
-		    $('.column').click(function(){
-		    	if (('#' + this.id) == superTile) {
+	    $('.column').click(function(){
+	    	if (('#' + this.id) == superTile) {
 		    	$('#avocado').effect('explode', 100);
 		    	clearInterval(loopDelay1);
 		    	console.log(superTile);
@@ -152,12 +142,7 @@
 		    	document.getElementById("nelson").play();
 		    	console.log('Nope, try again.');
 		    }
-    		});
-
-
-        // });
-
-
+		});
 
 	</script>
 
